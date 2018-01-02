@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">    
+        <title>d20</title>            
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="/manifest.json">
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#f9a44c">
+        <meta name="theme-color" content="#F9A44C">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="msapplication-TileImage" content="/app-icon-144.png">
+        <meta name="msapplication-TileColor" content="#F9A44C">
+        
+        <style>
+            html {
+                box-sizing: border-box;
+            }
+            
+            *, *:before, *:after {
+                box-sizing: inherit;
+            }
+
+            body { 
+                margin: 0;
+                font-family: 'Quicksand', sans-serif; 
+            }
+            input,
+            button {
+                border: 0;
+                font-family: inherit;
+                font-size: 5vw;
+            }
+
+            input:focus,
+            button:focus {
+                outline: none;
+            }
+
+            .app {
+                display: flex;
+                flex-direction: column;
+                height: 100vh;
+            }
+
+            .top-bar {
+                height: 40px;
+                background-color: #000;
+            }
+
+            .output-wrapper {
+                flex: 1;
+                flex-direction: column;
+                padding: 10px 20px;
+                background-color: #2C2C2C;
+                color: #fff;
+            }
+
+            .controls-wrapper {
+                flex: 1;
+                display: flex;                
+            }
+
+            .formula {                
+                flex: 2;
+                font-size: 2rem;                
+            }
+
+            .output {           
+                flex: 1;     
+                font-size: 6rem;
+                text-align: center;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+
+            .column {
+                display: flex;
+                flex-direction: column;
+                flex-basis: 25%;
+            }
+
+            .row {
+                display: flex;                
+            }
+
+            .btn {                
+                flex: 1;
+            }
+
+            .btn--action {
+                background-color: #F9A44C;
+                color: #fff;
+                font-size: 10vw;
+            }
+
+            .btn--roll {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: #F9A44C;
+                color: #fff;
+                flex: 2;
+            }
+
+            .btn--clear {
+                background-color: #C43529;
+                color: #fff;
+            }
+
+            .btn--dice {
+                background-color: #CCCCCC;
+                color: #141414;
+            }
+
+            .btn--parantheses {
+                background-color: #CCCCCC;
+                color: #141414;
+            }
+
+            .btn--number {
+                background-color: #D5D5D5;
+                color: #141414;
+            }
+
+            .btn svg {
+                width: 50%;
+                height: 50%;
+                fill: #fff;
+                transform: rotate(-45deg);
+            }
+
+            .animated {
+                animation-duration: 500ms;
+                animation-fill-mode: both;
+            }
+
+            @keyframes zoomIn {
+                from {
+                    opacity: 0;
+                    transform: scale3d(.3, .3, .3);
+                }
+
+                50% {
+                    opacity: 1;
+                }
+            }
+
+            .zoomIn {
+                animation-name: zoomIn;
+            }
+
+            /*
+ * Made by Erik Terwan
+ * 24th of November 2015
+ * All rights reserved
+ *
+ *
+ * If you are thinking of using this in
+ * production code, beware of the browser
+ * prefixes.
+ */
+#menuToggle
+{
+    margin: 9px 20px;
+    user-select: none;
+    z-index: 1;
+}
+
+#menuToggle input
+{
+    position: absolute;
+    top: -7px;
+    left: -5px;
+    display: block;
+    width: 40px;
+    height: 32px;
+    cursor: pointer;
+    opacity: 0; /* hide this */
+    z-index: 2; /* and place it over the hamburger */
+    -webkit-touch-callout: none;
+}
+
+#menuToggle span
+{
+    display: block;
+    width: 33px;
+    height: 4px;
+    margin-bottom: 5px;
+    position: relative;  
+    background: #cdcdcd;
+    border-radius: 3px;  
+    z-index: 1;  
+    transform-origin: 4px 0px;  
+    transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+                background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+                opacity 0.55s ease;
+}
+
+#menuToggle span:first-child
+{
+    transform-origin: 0% 0%;
+}
+
+#menuToggle span:nth-last-child(2)
+{
+    transform-origin: 0% 100%;
+}
+
+/* 
+ * Transform all the slices of hamburger
+ * into a crossmark.
+ */
+#menuToggle input:checked ~ span
+{
+    opacity: 1;
+    transform: rotate(45deg) translate(-2px, -1px);
+    background: #232323;
+}
+
+/*
+ * But let's hide the middle one.
+ */
+#menuToggle input:checked ~ span:nth-last-child(3)
+{
+    opacity: 0;
+    transform: rotate(0deg) scale(0.2, 0.2);
+}
+
+/*
+ * Ohyeah and the last one should go the other direction
+ */
+#menuToggle input:checked ~ span:nth-last-child(2)
+{
+    transform: rotate(-45deg) translate(0, -1px);
+}
+
+/*
+ * Make this absolute positioned
+ * at the top left of the screen
+ */
+#menu
+{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    margin: -100px 0 0 -50px;
+    padding: 50px;
+    padding-top: 125px;
+
+    background: #ededed;
+    list-style-type: none;
+    -webkit-font-smoothing: antialiased;
+    /* to stop flickering of text in safari */
+
+    transform-origin: 0% 0%;
+    transform: translate(-100%, 0);
+
+    transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+}
+
+#menu li
+{
+  padding: 10px 0;
+  font-size: 22px;
+}
+
+/*
+ * And let's slide it in from the left
+ */
+#menuToggle input:checked ~ ul
+{
+  transform: none;
+}
+        </style>
+        <link href="https://fonts.googleapis.com/css?family=Quicksand:300" rel="stylesheet">
+    </head>
+
+<body>
+    <!-- d20 d8 - + ÷ × = 0123456789 -->
+    <main class="app">
+        <div class="row top-bar">
+            <nav role="navigation">
+                <div id="menuToggle">
+                    <!--
+                    A fake / hidden checkbox is used as click reciever,
+                    so you can use the :checked selector on it.
+                    -->
+                    <input type="checkbox">
+
+                    <!--
+                    Some spans to act as a hamburger.
+
+                    They are acting like a real hamburger,
+                    not that McDonalds stuff.
+                    -->
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                    <!--
+                    Too bad the menu has to be inside of the button
+                    but hey, it's pure CSS magic.
+                    -->
+                    <ul id="menu">
+                        <a href="#"><li>Home</li></a>
+                        <a href="#"><li>About</li></a>
+                        <a href="#"><li>Info</li></a>
+                        <a href="#"><li>Contact</li></a>
+                        <a href="https://erikterwan.com/" target="_blank"><li>Show me more</li></a>
+                    </ul>
+                </div>
+            </nav>
+            
+        </div>
+        <div class="row output-wrapper">
+            <div class="formula"></div>
+
+            <div class="output"></div>
+        </div>
+        <div class="controls-wrapper">
+            <div class="column">
+                <button class="btn btn--dice" data-type="dice" data-value="100">d%</button>
+                <button class="btn btn--dice" data-type="dice" data-value="10">d10</button>
+                <button class="btn btn--dice" data-type="dice" data-value="4">d4</button>
+                <button class="btn btn--number" data-type="number" data-value="7">7</button>
+                <button class="btn btn--number" data-type="number" data-value="4">4</button>
+                <button class="btn btn--number" data-type="number" data-value="1">1</button>
+                <button class="btn btn--number" data-type="number" data-value="0">0</button>
+            </div>
+            <div class="column">
+                <button class="btn btn--dice" data-type="dice" data-value="x">dx</button>
+                <button class="btn btn--dice" data-type="dice" data-value="12">d12</button>
+                <button class="btn btn--dice" data-type="dice" data-value="6">d6</button>
+                <button class="btn btn--number" data-type="number" data-value="8">8</button>
+                <button class="btn btn--number" data-type="number" data-value="5">5</button>
+                <button class="btn btn--number" data-type="number" data-value="2">2</button>
+                <button class="btn btn--parantheses" data-type="parantheses" data-value="(">(</button>
+            </div>
+            <div class="column">
+                <button class="btn btn--clear" data-type="clear" data-value="del">del</button>
+                <button class="btn btn--dice" data-type="dice" data-value="20">d20</button>
+                <button class="btn btn--dice" data-type="dice" data-value="8">d8</button>
+                <button class="btn btn--number" data-type="number" data-value="9">9</button>
+                <button class="btn btn--number" data-type="number" data-value="6">6</button>
+                <button class="btn btn--number" data-type="number" data-value="3">3</button>
+                <button class="btn btn--parantheses" data-type="parantheses" data-value=")">)</button>
+            </div>
+            <div class="column">
+                <button class="btn btn--clear" data-type="clear" data-value="clear">AC</button>
+                <button class="btn btn--action" data-type="action" data-value="/">÷</button>
+                <button class="btn btn--action" data-type="action" data-value="*">×</button>
+                <button class="btn btn--action" data-type="action" data-value="-">-</button>
+                <button class="btn btn--action" data-type="action" data-value="+">+</button>
+                <button class="btn btn--roll" data-type="roll">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                            <path style="line-height:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;block-progression:tb;isolation:auto;mix-blend-mode:normal;marker:none" d="M50 5L11.029 27.5v45l1.29.746L50 95l38.971-22.5v-45L50 5zm0 7.595l15.566 23.024H34.434L50 12.596zm-8.425 3.236l-12.8 18.932-9.995-5.77L41.575 15.83zm16.851 0l22.794 13.16-9.995 5.77-12.799-18.93zm-42.23 17.635l9.997 5.77-9.997 20.552V33.466zm67.608 0V59.79l-9.997-20.553 9.995-5.771zm-49.76 7.32h31.912L50 68.423 34.044 40.786zm-4.28 2.922l15.567 26.96L17.608 68.7l12.156-24.992zm40.472 0L82.393 68.7l-27.722 1.968 15.565-26.96zM24.62 74.378l22.797 1.62v11.543L24.62 74.38zm50.763 0L52.584 87.542V76l22.798-1.62z" color="#000" font-weight="400" font-family="sans-serif" white-space="normal" overflow="visible"/>
+                        </svg>
+                </button>
+            </div>
+        </div>        
+    </main>    
+<script type="text/javascript" src="app.js"></script></body>
+</html>
