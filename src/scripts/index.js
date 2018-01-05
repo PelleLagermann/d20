@@ -1,14 +1,20 @@
+import { prototypes } from "./helpers/prototypes.js";
+
+import { navigation } from "./navigation.js";
+
 import { getRandomIntInclusive } from "./helpers/rand.js";
 import { actionHandler, clearHandler, diceHandler, numberHandler, paranthesesHandler, rollHandler } from './inputHandlers.js';
 import { findAncestor } from "./helpers/findAncestor.js";
 import { clickHandler } from "./helpers/clickHandler.js";
 
+//Styles
+import "./../styles/index.scss";
 
-//prototypes
-String.prototype.replaceAll = function(search, replacement) {
-    var target = this;
-    return target.replace(new RegExp(search, 'g'), replacement);
-};
+//Inits
+navigation.init();
+prototypes.init();
+
+
 
 //Globals
 global.findAncestor = findAncestor;

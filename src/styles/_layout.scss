@@ -1,0 +1,24 @@
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body { 
+    margin: 0;
+    font-family: 'Quicksand', sans-serif; 
+}
+
+input,
+button {
+    border: 0;
+    font-family: inherit;
+    font-size: 5vw;
+}
+
+input:focus,
+button:focus {
+    outline: none;
+}

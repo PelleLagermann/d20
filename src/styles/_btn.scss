@@ -1,0 +1,57 @@
+.btn {                
+    flex: 1;
+
+    svg {
+        width: 50%;
+        height: 50%;
+        fill: #fff;
+        transform: rotate(-45deg);
+    }
+
+    //Variants
+    &--action {
+        background-color: var(--theme-color);
+        color: #fff;
+        font-size: 10vw;
+    }
+
+    &--clear {
+        background-color: #C43529;
+        color: #fff;
+    }
+
+    &--dice {
+        background-color: #CCCCCC;
+        color: #141414;
+    }
+
+    &--number {
+        background-color: #D5D5D5;
+        color: #141414;
+    }
+
+    &--parantheses {
+        background-color: #CCCCCC;
+        color: #141414;
+    }
+
+    &--roll {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--theme-color);
+        color: #fff;
+        flex: 2;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
