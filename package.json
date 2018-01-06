@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "clean": "rimraf dist",
+    "clean": "rimraf app.*.css",
     "build": "set NODE_ENV=production && npm run clean && webpack -p",
     "serve": "webpack-dev-server",
     "deploy": "npm run build && git subtree push --prefix dist origin gh-pages"
