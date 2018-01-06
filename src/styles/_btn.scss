@@ -1,5 +1,6 @@
-.btn {                
-    flex: 1;
+.btn {
+    height: 40px;
+    font-size: 20px;
 
     svg {
         width: 50%;
@@ -12,7 +13,12 @@
     &--action {
         background-color: var(--theme-color);
         color: #fff;
-        font-size: 10vw;
+        font-size: 30px;
+
+        span {
+            position: relative;
+            top: -7px;
+        }
     }
 
     &--clear {
@@ -36,12 +42,12 @@
     }
 
     &--roll {
+        height: 80px;
         display: flex;
         align-items: center;
         justify-content: center;
         background-color: var(--theme-color);
-        color: #fff;
-        flex: 2;
+        color: #fff;        
     }
 }
 

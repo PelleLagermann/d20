@@ -1,4 +1,4 @@
-.main-navigation {
+.main-navigation {    
     position: absolute;
     top: 0;
     left: 0;
@@ -7,18 +7,17 @@
     margin: 0;
     padding: 50px;
     padding-top: 125px;
-    border-radius: 50%;
+    border-radius: 0 0 50% 0;
 
     background: #555;    
     list-style-type: none;
     -webkit-font-smoothing: antialiased;
-    /* to stop flickering of text in safari */
-
     transform-origin: 0% 0%;
     transform: translate(-50%, -100%);
+    opacity: 0;
 
-    transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
-                border-radius 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+    transition: transform .7s cubic-bezier(0.77,0.2,0.05,1.0),
+                border-radius 1s linear;
 
     &-items {
 
@@ -31,8 +30,9 @@
 }
 
 .nav-is-open {
-    .main-navigation {
+    .main-navigation {        
         border-radius: 0;
         transform: none;
+        opacity: 1;
     }
 }
