@@ -31,7 +31,7 @@
         }
 
         .output-wrapper {
-            flex: 1;
+            flex: 2;
             flex-direction: column;
             padding: 10px 20px;
             background-color: #2C2C2C;
@@ -130,10 +130,18 @@
             </div>
             <div class="column">
                 <button class="btn btn--clear" data-type="clear" data-value="clear">AC</button>
-                <button class="btn btn--action" data-type="action" data-value="/">÷</button>
-                <button class="btn btn--action" data-type="action" data-value="*">×</button>
-                <button class="btn btn--action" data-type="action" data-value="-">-</button>
-                <button class="btn btn--action" data-type="action" data-value="+">+</button>
+                <button class="btn btn--action" data-type="action" data-value="/">
+                    <span>÷</span>
+                </button>
+                <button class="btn btn--action" data-type="action" data-value="*">
+                    <span>×</span>                    
+                </button>
+                <button class="btn btn--action" data-type="action" data-value="-">
+                    <span>-</span>                    
+                </button>
+                <button class="btn btn--action" data-type="action" data-value="+">
+                    <span>+</span>                    
+                </button>
                 <button class="btn btn--roll" data-type="roll">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
                         <path style="line-height:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;block-progression:tb;isolation:auto;mix-blend-mode:normal;marker:none"
