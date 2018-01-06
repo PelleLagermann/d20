@@ -1,0 +1,19 @@
+TODO
+
+Implement all buttons
+ - del / C / AC
+ - parantheses
+ - dx
+
+Show result string when rolling
+
+Show effect on "crit"
+
+Personalisation
+ - Create characters
+ - Save rolls for characters
+
+Create login 
+ - Firebase?
+
+
