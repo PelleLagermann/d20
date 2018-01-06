@@ -1,7 +1,13 @@
-var Webpack = require('webpack');
-var Path = require('path');
-var HtmlWebpackPlugin = require("html-webpack-plugin");
-var CopyWebpackPlugin = require('copy-webpack-plugin');
+const Webpack = require('webpack');
+const Path = require('path');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+
+const extractSass = new ExtractTextPlugin({
+    filename: "[name].[contenthash].css",
+    disable: process.env.NODE_ENV === "development"
+});
 
 const config = {
     entry: {
@@ -19,8 +25,16 @@ const config = {
                 exclude: /node_modules/
             },
             {
-                test:/\.(s*)css$/,
-                use:['style-loader','css-loader', 'sass-loader']
+                test: /\.scss$/,
+                use: extractSass.extract({
+                    use: [{
+                        loader: "css-loader"
+                    }, {
+                        loader: "sass-loader"
+                    }],
+                    // use style-loader in development
+                    fallback: "style-loader"
+                })
             },
             {
                 test: /\.(jpe?g|png|gif|svg)$/,
@@ -42,7 +56,8 @@ const config = {
         }),
         new Webpack.DefinePlugin({
             "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV)
-        })
+        }),
+        extractSass
     ]
 };
 
