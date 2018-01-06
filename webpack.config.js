@@ -30,6 +30,8 @@ const config = {
                     use: [{
                         loader: "css-loader"
                     }, {
+                        loader: 'postcss-loader'                        
+                    }, {
                         loader: "sass-loader"
                     }],
                     // use style-loader in development
