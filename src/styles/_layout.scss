@@ -35,30 +35,36 @@ button:focus {
 }
 
 .output-wrapper {
-    flex: 2;
+    flex: 1;
     flex-direction: column;
     padding: 10px 20px;
     background-color: #2C2C2C;
     color: #fff;
 }
 
-.controls-wrapper {
-    flex: 1;
+.controls-wrapper {    
     display: flex;
 }
 
 .formula {
-    flex: 2;
+    flex: 1;
     font-size: 2rem;
 }
 
-.output {
-    flex: 1;
-    font-size: 6rem;
-    text-align: center;
+.output {        
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+
+    &__formula {
+        font-size: 1.5rem;
+        text-align: right;
+    }
+
+    &__total {
+        font-size: 6rem;    
+        text-align: center;
+    }
 }
 
 .column {

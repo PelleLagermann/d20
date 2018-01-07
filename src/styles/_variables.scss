@@ -4,4 +4,17 @@
     //Navigation
     --nav-toggle: #fff;    
     --main-nav-bg: blue;
+
+    //
+    --btn-height: 40px;
+
+    //Z-indexes    
+    --nav-z: 10;
+    --nav-overflow-z: 11;
+}
+
+@media screen and (min-height: 700px) {
+    :root {
+        --btn-height: 60px;
+    }    
 }

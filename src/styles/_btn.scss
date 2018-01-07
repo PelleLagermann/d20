@@ -1,6 +1,6 @@
 .btn {
     margin: 0;
-    height: 40px;
+    flex-basis: var(--btn-height);
     font-size: 20px;
 
     svg {
@@ -8,6 +8,7 @@
         height: 50%;
         fill: #fff;
         transform: rotate(-45deg);
+        z-index: var(--nav-overflow-z);
     }
 
     //Variants
@@ -43,13 +44,13 @@
     }
 
     &--roll {
-        height: 80px;
+        flex-basis: calc(2 * var(--btn-height));
         display: flex;
         align-items: center;
         justify-content: center;
         background-color: var(--theme-color);
         color: #fff;        
-    }
+    }    
 }
 
 

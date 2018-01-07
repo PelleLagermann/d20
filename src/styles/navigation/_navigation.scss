@@ -18,6 +18,7 @@
 
     transition: transform .7s cubic-bezier(0.77,0.2,0.05,1.0),
                 border-radius 1s linear;
+    z-index: var(--nav-z);
 
     &-items {
 
