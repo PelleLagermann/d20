@@ -5,8 +5,6 @@ Implement all buttons
  - parantheses
  - dx
 
-Show result string when rolling
-
 Show effect on "crit"
 
 Personalisation

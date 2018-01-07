@@ -7,10 +7,13 @@ import { actionHandler, clearHandler, diceHandler, numberHandler, paranthesesHan
 import { findAncestor } from "./helpers/findAncestor.js";
 import { clickHandler } from "./helpers/clickHandler.js";
 
+import { registerServiceWorker } from "./registerServiceWorker.js";
+
 //Styles
 import "./../styles/index.scss";
 
 //Inits
+registerServiceWorker.init();
 navigation.init();
 prototypes.init();
 
@@ -42,6 +45,8 @@ global.cur = null;
 //Elements
 global.formulaElem = document.querySelector(".formula");
 global.outputElem = document.querySelector(".output");
+global.outputFormulaElem = document.querySelector(".output__formula");
+global.outputTotalElem = document.querySelector(".output__total");
 global.buttonWrapper = document.querySelector(".controls-wrapper");
 
 //Input handlers
@@ -73,7 +78,7 @@ global.buildFormulaStr = function (buildForDisplay) {
                     total += getRandomIntInclusive(1, part.dice);
                 }
 
-                formulaStr = formulaStr + "" + total + " ";
+                formulaStr = formulaStr + "(" + total + ") ";
             } else {
                 formulaStr = formulaStr + formula[i].value + " ";
             }            

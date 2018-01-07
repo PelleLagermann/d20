@@ -31,7 +31,8 @@ function diceHandler (value) {
     var newInput = {
         type: inputType.dice,        
         rolls: 1,
-        dice: value        
+        dice: value,
+        isCustom: value === "x"
     };
     newInput.value = newInput.rolls + "d" + newInput.dice;
 
@@ -42,7 +43,8 @@ function diceHandler (value) {
                 cur = newInput;
                 break;                
             case inputType.dice:
-                if (cur.dice === value) {
+                if (cur.dice === value ||
+                    cur.isCustom && value === "x") {
                     cur.rolls++;
                     cur.value = cur.rolls + "d" + cur.dice;
                 } else {
@@ -77,9 +79,15 @@ function numberHandler (value) {
                 formula.push(cur);
                 cur = newInput;
                 break;                
-            case inputType.dice:
-                formula.push(cur);
-                cur = newInput;
+            case inputType.dice: 
+                if (cur.isCustom) {                    
+                    cur.dice = cur.dice.replace("x", "") + value;
+                    cur.value = cur.rolls + "d" + cur.dice;
+                } else {
+                    formula.push(cur);
+                    cur = newInput;
+                }               
+                
                 break;
             case inputType.number:                
             default:
@@ -107,11 +115,13 @@ function rollHandler (value) {
     //var a = getRandomIntInclusive(1, value.replace("d", ""));
 
     const result = eval(formulaStr);
-    outputElem.classList.add("animated", "zoomIn");
-    outputElem.textContent = result;
+    outputFormulaElem.textContent = formulaStr;
+    outputTotalElem.textContent = result;
+    outputTotalElem.classList.add("animated", "zoomIn");
+    
 
     setTimeout(function () {
-        outputElem.classList.remove("animated", "zoomIn");
+        outputTotalElem.classList.remove("animated", "zoomIn");
     }, 700);
 }
 
