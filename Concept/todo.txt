@@ -1,5 +1,7 @@
 TODO
 
+Disable browser cache - first video in pwa course
+
 Implement all buttons
  - del / C / AC
  - parantheses
@@ -14,4 +16,4 @@ Personalisation
 Create login 
  - Firebase?
 
-
+Add ripple
