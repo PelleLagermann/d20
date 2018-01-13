@@ -9,10 +9,10 @@ self.addEventListener("install", function (event) {
       .then(function(cache) {
         log("Pre caching", event);  
         cache.addAll([
-          "/",
-          "/index.html",
-          "app.css",
-          "/app.js",
+          "/d20/",
+          "/d20/index.html",
+          "/d20/app.css",
+          "/d20/app.js",
           "https://fonts.googleapis.com/css?family=Quicksand:300"
         ]);
       })
